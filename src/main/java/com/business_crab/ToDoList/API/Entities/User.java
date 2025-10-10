@@ -1,5 +1,6 @@
 package com.business_crab.ToDoList.API.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -12,12 +13,19 @@ public class User {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
-    private String name , email , password;
+    @Column(name="name")
+    private String name;
+    @Column(name="email")
+    private String email;
+    @Column(name="password")
+    private String password;
 
     public User() {}
-    public User(final String name , 
+    public User(final Long id ,
+                final String name , 
                 final String email ,
                 final String password) {
+        this.id = id;
         this.name = name;
         this.email = email;
         this.password = password;
