@@ -1,17 +1,19 @@
-package com.business_crab.ToDoList.API.Entities;
+package com.business_crab.ToDoList.API.entities;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 
 @Entity
+@Table(name="tasks")
 public class Task {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
     private Long id;
     private String title;
-    private String desription;
+    private String description;
 
     public Task() {}
     public Task(final Long id ,
@@ -19,7 +21,7 @@ public class Task {
                 final String description) {
         this.id = id;
         this.title = title;
-        this.desription = description;
+        this.description = description;
     }
 
     public Long getId() {
@@ -39,15 +41,15 @@ public class Task {
     }
 
     public String getDesc() {
-        return desription;
+        return description;
     }
 
     public void setDesc(final String description) {
-        this.desription = description;
+        this.description = description;
     }
 
     @Override
     public String toString() {
-        return "Id: " + id + "\nTitle: " + title + "\nDescription: " + desription;
+        return "Id: " + id + "\nTitle: " + title + "\nDescription: " + description;
     }
 }
