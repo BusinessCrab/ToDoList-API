@@ -6,6 +6,4 @@ import org.springframework.stereotype.Repository;
 import com.business_crab.ToDoList.API.entities.Task;
 
 @Repository
-public interface TaskRepository extends JpaRepository<Task, Long>{
-    
-}
+public interface TaskRepository extends JpaRepository<Task, Long> { }
