@@ -42,6 +42,10 @@ public class UserService {
     }
 
     public void delete(final Long id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isEmpty()) {
+            throw new IllegalStateException("The with such id is not found");
+        }
         userRepository.deleteById(id);
     }
 }

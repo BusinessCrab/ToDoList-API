@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.business_crab.ToDoList.API.entities.Task;
@@ -34,8 +35,10 @@ public class TaskContoller {
     }
 
     @PutMapping(path = "{id}")
-    public Task update(final @RequestBody Task newTask , final @PathVariable Long id) {
-        return taskService.update(newTask , id);
+    public void update(final @PathVariable Long id ,
+                       final @RequestParam String title ,
+                       final @RequestParam String description) {
+        taskService.update(id , title , description);
     }
 
     @DeleteMapping(path = "{id}")
