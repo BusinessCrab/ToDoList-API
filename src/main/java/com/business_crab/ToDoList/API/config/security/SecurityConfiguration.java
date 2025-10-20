@@ -45,6 +45,9 @@ public class SecurityConfiguration {
                                                                 .anyRequest()
                                                                 .authenticated())
                     .headers(headers -> headers.frameOptions(frameOptions -> frameOptions.sameOrigin()))
+                    .addFilter(new JwtAuthenticationFilter(
+                        authenticationManager(httpSecurity.getSharedObject(AuthenticationConfiguration.class)) ,
+                        jwtUtil))
                     .addFilter(new )
     }
 }
