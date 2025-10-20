@@ -37,7 +37,7 @@ public class SecurityConfiguration {
     public SecurityFilterChain securityFilterChain(HttpSecurity httpSecurity)
     throws Exception {
         httpSecurity.csrf(httpSecurityCsrfConfigurer -> httpSecurityCsrfConfigurer.disable())
-                    .authorizeHttpRequests(requests -> requestsrequestMatchers("/api/auth/login").permitAll()
+                    .authorizeHttpRequests(requests -> requests.requestMatchers("/api/auth/login").permitAll()
                                                                 .requestMatchers("api/auth/register").permitAll()
                                                                 .requestMatchers("api/auth/refresh-token").permitAll()
                                                                 .requestMatchers("/h2-console/**").permitAll()
@@ -48,6 +48,10 @@ public class SecurityConfiguration {
                     .addFilter(new JwtAuthenticationFilter(
                         authenticationManager(httpSecurity.getSharedObject(AuthenticationConfiguration.class)) ,
                         jwtUtil))
-                    .addFilter(new )
+                    .addFilter(new JwtAuthorizationFilter(
+                        authenticationManager(httpSecurity.getSharedObject(AuthenticationConfiguration.class)) ,
+                        jwtUtil ,
+                        userDetailsService));
+        return httpSecurity.build();
     }
 }
