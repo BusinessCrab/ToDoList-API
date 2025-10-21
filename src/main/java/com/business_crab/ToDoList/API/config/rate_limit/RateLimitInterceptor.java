@@ -20,15 +20,15 @@ public class RateLimitInterceptor implements HandlerInterceptor {
     private final ConcurrentMap<String , Bucket> cache = new ConcurrentHashMap<>();
 
     private Bucket getBucket(final String ip) {
-        return cache.computeIfAbsent(ip, k -> Bucket.builder()
+        return cache.computeIfAbsent(ip, _ -> Bucket.builder()
                                                     .addLimit(Bandwidth.classic(10, Refill.greedy(10, Duration.ofMinutes(1))))
                                                     .build());
     }
 
     @Override
-    public boolean preHandle(final @NonNull HttpServletRequest request ,
-                             final HttpServletResponse response ,
-                             final Object handler)
+    public boolean preHandle(@NonNull HttpServletRequest request ,
+                             @NonNull HttpServletResponse response ,
+                             @NonNull Object handler)
     throws IOException {
         String ip = request.getRemoteAddr();
         Bucket bucket = getBucket(ip);
